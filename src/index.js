@@ -99,11 +99,11 @@ export default class Emitter {
 }
 
 
-function validateId (id, message) {
-  return validateInput(id, 'string', 'Invalid function.');
+function validateId (id) {
+  return validateInput(id, 'string', 'Invalid ID.');
 }
 
-function validateFunction (fn, message) {
+function validateFunction (fn) {
   return validateInput(fn, 'function', 'Invalid function.');
 }
 
