@@ -14,7 +14,7 @@ export default class Emitter {
    * Adds event listener. If listener is identical to existing one, it will be moved to the end of the queue.
    * @param {string} id - Name of the event to be listened to.
    * @param {Function} fn - Function to be called when event is fired.
-   * @param {*} context - Context in which function will be fired.
+   * @param {*} [context] - Context in which function will be fired.
    */
   add (id, fn, context) {
     this._add(id, fn, context, false);
@@ -24,7 +24,7 @@ export default class Emitter {
    * Adds event listener that will fire only once.
    * @param {string} id - Name of the event to be listened to.
    * @param {Function} fn - Function to be called when event is fired.
-   * @param {*} context - Context in which function will be fired.
+   * @param {*} [context] - Context in which function will be fired.
    */
   once (id, fn, context) {
     this._add(id, fn, context, true);
@@ -55,7 +55,7 @@ export default class Emitter {
   /**
    * Fires all event listeners with given ID.
    * @param {string} id - Name of the event to be fired.
-   * @param {Array} params - List of parameters to be passed to functions.
+   * @param {Array} [params] - List of parameters to be passed to functions.
    */
   fire (id, params = []) {
     if (validateId(id)) {
