@@ -1,6 +1,6 @@
 {
   "name": "fczbkk-emitter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple JavaScript event emitter.",
   "repository": {
     "type": "git",
