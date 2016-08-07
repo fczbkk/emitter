@@ -21,15 +21,15 @@ var my_listener = my_emitter.add('aaa', function () {...});
 my_listener.remove();
 ```
 
-### index
+### Emitter
 
 Class representing simple Emitter.
 
-### constructor
+#### constructor
 
 Creates simple Emitter.
 
-### add
+#### add
 
 Adds event listener. If listener is identical to existing one, it will be moved to the end of the queue.
 
@@ -41,7 +41,7 @@ Adds event listener. If listener is identical to existing one, it will be moved 
 
 Returns **[Listener](#listener)** 
 
-### once
+#### once
 
 Adds event listener that will fire only once.
 
@@ -53,7 +53,7 @@ Adds event listener that will fire only once.
 
 Returns **[Listener](#listener)** 
 
-### remove
+#### remove
 
 Removes event listener. Does nothing if such listener does not exist.
 
@@ -62,7 +62,7 @@ Removes event listener. Does nothing if such listener does not exist.
 -   `id` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the event to be listened to.
 -   `fn` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** Function to be called when event is fired.
 
-### fire
+#### fire
 
 Fires all event listeners with given ID.
 

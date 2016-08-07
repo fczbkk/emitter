@@ -13,6 +13,7 @@
 
 /**
  * Class representing simple Emitter.
+ * @name Emitter
  */
 export default class Emitter {
 
