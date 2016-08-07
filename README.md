@@ -2,6 +2,58 @@
 
 Simple JavaScript event emitter.
 
+[![npm](https://img.shields.io/npm/v/fczbkk-emitter.svg?maxAge=2592000)](https://www.npmjs.com/package/fczbkk-emitter)
+[![npm](https://img.shields.io/github/license/fczbkk/emitter.svg?maxAge=2592000)](https://github.com/fczbkk/emitter/blob/master/LICENSE)
+[![David](https://img.shields.io/david/fczbkk/emitter.svg?maxAge=2592000)](https://david-dm.org/fczbkk/emitter)
+[![Travis](https://img.shields.io/travis/fczbkk/emitter.svg?maxAge=2592000)](https://travis-ci.org/fczbkk/emitter)
+
+## How to use
+
+Install the library via NPM:
+
+```shell
+npm install fczbkk-emitter --save
+```
+
+Then use in your project like this:
+
+```javascript
+import Emitter from 'fczbkk-emitter';
+
+// create Emitter instance
+var my_emitter = new Emitter();
+
+// add some listeners
+function logCustomEvent () {
+  console.log('custom event fired');
+}
+
+function logCustomEventOnce () {
+  console.log('this should only be fired once');
+}
+
+my_emitter.add('custom_event', logCustomEvent);
+my_emitter.once('custom_event', logCustomEventOnce);
+
+// fire the event
+my_emitter.fire('custom_event');
+  // --> custom event fired
+  // --> this should only be fired once
+
+// fire the event second time, the listener added by `once()` will not
+// activate again
+my_emitter.fire('custom_event')
+  // --> custom event fired
+
+// remove listener
+my_emitter.remove('custom_event', logCustomEvent);
+  // firing the event now will not activate any listeners
+
+// working with anonymous functions in listeners
+var my_listener = my_emitter.add('custom_event', function () {...});
+my_listener.remove();
+```
+
 ## Documentation
 
 ### Listener
@@ -39,7 +91,7 @@ Adds event listener. If listener is identical to existing one, it will be moved 
 -   `fn` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** Function to be called when event is fired.
 -   `context` **\[Any]** Context in which function will be fired.
 
-Returns **[Listener](#listener)** 
+Returns **[Listener](#listener)**
 
 #### once
 
@@ -51,7 +103,7 @@ Adds event listener that will fire only once.
 -   `fn` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** Function to be called when event is fired.
 -   `context` **\[Any]** Context in which function will be fired.
 
-Returns **[Listener](#listener)** 
+Returns **[Listener](#listener)**
 
 #### remove
 
