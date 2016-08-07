@@ -24,7 +24,7 @@
     "dev": "npm run test -- --no-single-run --auto-watch",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "postversion": "git push && git push --tags && npm publish",
-    "version": "npm run build && npm run changelog && git add -A",
+    "version": "npm run build && npm run changelog && npm run doc && git add -A",
     "doc": "documentation readme ./src/index.js -s 'Documentation'"
   },
   "main": "lib/index.js",
