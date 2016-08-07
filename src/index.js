@@ -1,4 +1,17 @@
 /**
+ * Object returned when adding new listener. Has a `remove()` method, which is handy for working with anonymous functions.
+ * @typedef {Object} Listener
+ * @property {Function} remove - When called, the listener will be removed from Emitter.
+ *
+ * @example
+ * // add anonymous function
+ * var my_listener = my_emitter.add('aaa', function () {...});
+ * // remove the listener without the need to reference the anonymous function
+ * my_listener.remove();
+ */
+
+
+/**
  * Class representing simple Emitter.
  */
 export default class Emitter {
@@ -15,9 +28,10 @@ export default class Emitter {
    * @param {string} id - Name of the event to be listened to.
    * @param {Function} fn - Function to be called when event is fired.
    * @param {*} [context] - Context in which function will be fired.
+   * @returns {Listener}
    */
   add (id, fn, context) {
-    this._add(id, fn, context, false);
+    return this._add(id, fn, context, false);
   }
 
   /**
@@ -25,13 +39,14 @@ export default class Emitter {
    * @param {string} id - Name of the event to be listened to.
    * @param {Function} fn - Function to be called when event is fired.
    * @param {*} [context] - Context in which function will be fired.
+   * @returns {Listener}
    */
   once (id, fn, context) {
-    this._add(id, fn, context, true);
+    return this._add(id, fn, context, true);
   }
 
   /**
-   * Removes event listener. Does not hing if such listener does not exist.
+   * Removes event listener. Does nothing if such listener does not exist.
    * @param {string} id - Name of the event to be listened to.
    * @param {Function} fn - Function to be called when event is fired.
    */
@@ -84,15 +99,17 @@ export default class Emitter {
 
   _add (id, fn, context = null, once) {
     if (validateId(id) && validateFunction(fn)) {
-
       // this will cause duplicate listener to be moved to the end of queue
       this.remove(id, fn);
-
       this._getCategory(id).push({
         fn: fn,
         context: context,
         once: once
       });
+    }
+
+    return {
+      remove: () => this.remove(id, fn)
     }
   }
 

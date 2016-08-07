@@ -65,6 +65,13 @@ describe('Emitter', function () {
       expect(add_function).toThrow();
     });
 
+    it('should return object with `remove()` method', function () {
+      const listener = x.add('aaa', fn1);
+      expect(x._listeners['aaa'].length).toEqual(1);
+      listener.remove();
+      expect(x._listeners['aaa'].length).toEqual(0);
+    });
+
   });
 
   describe('remove', function () {
@@ -123,6 +130,13 @@ describe('Emitter', function () {
       x.once('aaa', fn1);
       x.fire('aaa');
       expect(x._listeners['aaa'][0]).not.toBeDefined();
+    });
+
+    it('should return object with `remove()` method', function () {
+      const listener = x.once('aaa', fn1);
+      expect(x._listeners['aaa'].length).toEqual(1);
+      listener.remove();
+      expect(x._listeners['aaa'].length).toEqual(0);
     });
 
   });
